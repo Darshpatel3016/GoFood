@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import Navbar from '../Components/Navbar';
+import axios from 'axios';
+import { BASE_URL } from "../config";
+
 
 
 export default function Signup() {
@@ -21,16 +24,18 @@ export default function Signup() {
             return [latitude, longitude]
         })
         // console.log(latlong)
+
         let [lat, long] = latlong
         console.log(lat, long)
-        const response = await fetch("https://gofood-backend-pea7.onrender.com/api/auth/getlocation", {
-            method: 'POST',
+        const response = await axios.post(`${BASE_URL}/api/auth/getlocation`, {
+            latlong: { lat, long }
+        }, {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ latlong: { lat, long } })
-
         });
+        const data = response.data;
+
         const { location } = await response.json()
         console.log(location);
         setAddress(location);
@@ -39,15 +44,20 @@ export default function Signup() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch("https://gofood-backend-pea7.onrender.com/api/auth/createuser", {
-            method: 'POST',
+        const response = await axios.post(`${BASE_URL}/api/auth/createuser`, {
+
+            name: credentials.name,
+            email: credentials.email,
+            password: credentials.password,
+            location: credentials.geolocation
+        }, {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ name: credentials.name, email: credentials.email, password: credentials.password, location: credentials.geolocation })
-
         });
-        const json = await response.json()
+
+        const json = response.data
+
         console.log(json);
         if (json.success) {
             //save the auth toke to local storage and redirect

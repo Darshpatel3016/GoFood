@@ -1,6 +1,8 @@
 import React from "react";
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useCart, useDispatchCart } from "../Components/ContexReducer";
+import axios from "axios";
+import { BASE_URL } from "../config";
 
 
 export default function Cart() {
@@ -20,16 +22,15 @@ export default function Cart() {
 
         let userEmail = localStorage.getItem("userEmail");
 
-        let response = await fetch("https://gofood-backend-pea7.onrender.com/api/orderData", {
-            method: "POST",
+        let response = await axios.post(`${BASE_URL}/api/orderData`, {
+
+            order_data: data,
+            email: userEmail,
+            Order_date: new Date().toDateString()
+        }, {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                order_data: data,
-                email: userEmail,
-                Order_date: new Date().toDateString()
-            })
         });
 
         console.log("Order Response:", response.status)

@@ -1,0 +1,1 @@
+export const BASE_URL = "https://gofood-backend-pea7.onrender.com";

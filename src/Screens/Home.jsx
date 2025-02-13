@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import Card from '../Components/Card';
+import axios from 'axios';
+import { BASE_URL } from "../config";
+
 
 
 
@@ -12,14 +15,14 @@ export default function Home() {
     const [foodItem, setFoodItem] = useState([]);
 
     const loadData = async () => {
-        let response = await fetch("https://gofood-backend-pea7.onrender.com/api/foodData", {
-            method: "POST",
+        let response = await axios.post(`${BASE_URL}/api/foodData`, {
             headers: {
                 'Content-Type': 'application/json'
             }
         });
 
-        response = await response.json();
+        const json = response.data;
+        // response = await response.json();
 
         setFoodItem(response[0]);
         setFoodCat(response[1]);

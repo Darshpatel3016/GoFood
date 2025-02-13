@@ -1,6 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios';
+import { BASE_URL } from "../config";
+
 
 
 export default function Login() {
@@ -13,15 +16,16 @@ export default function Login() {
   const handleSubmit = async (event) => {
 
     event.preventDefault();
-    const response = await fetch("https://gofood-backend-pea7.onrender.com/api/login", {
-      method: "POST",
+    const response = await axios.post(`${BASE_URL}/api/login`, {
+      email: credentials.email,
+      password: credentials.password
+    }, {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ email: credentials.email, password: credentials.password })
     });
 
-    const json = await response.json()
+    const json = response.data;
     console.log(json);
 
     if (!json.success) {

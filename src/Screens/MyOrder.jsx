@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Footer from '../Components/Footer';
 import Navbar from '../Components/Navbar';
+import axios from 'axios';
+import { BASE_URL } from "../config";
+
 
 
 export default function MyOrder() {
@@ -9,20 +12,21 @@ export default function MyOrder() {
 
     const fetchMyOrder = async () => {
 
-        console.log(localStorage.getItem('userEmail'))
+        try {
 
-        await fetch("https://gofood-backend-pea7.onrender.com/api/myOrderData", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
+            console.log(localStorage.getItem('userEmail'));
+
+            const { data } = await axios.post(`${BASE_URL}/api/myOrderData`, {
                 email: localStorage.getItem('userEmail')
-            })
-        }).then(async (res) => {
-            let response = await res.json()
-            await setOrderData(response)
-        })
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            setOrderData(data);
+        } catch (error) {
+            console.log("Error fetching orders:", error);
+        }
     }
 
     useEffect(() => {
@@ -66,7 +70,7 @@ export default function MyOrder() {
 
                                                             <div className="card mt-3" style={{ width: "16rem", maxHeight: "130px" }}>
 
-                                                                {/* <img src={arrayData.img} className="card-img-top" alt="..." style={{ height: "120px", objectFit: "fill" }} /> */} 
+                                                                {/* <img src={arrayData.img} className="card-img-top" alt="..." style={{ height: "120px", objectFit: "fill" }} /> */}
 
                                                                 <div className="card-body">
                                                                     <h5 className="card-title">{arrayData.name}</h5>
