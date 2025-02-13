@@ -20,7 +20,7 @@ export default function Cart() {
 
         let userEmail = localStorage.getItem("userEmail");
 
-        let response = await fetch("http://localhost:5000/api/orderData", {
+        let response = await fetch("https://gofood-backend-pea7.onrender.com/api/orderData", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
