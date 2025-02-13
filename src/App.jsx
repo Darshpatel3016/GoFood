@@ -3,7 +3,8 @@ import Home from './Screens/Home'
 import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap/dist/js/bootstrap.bundle"
 import {
-  BrowserRouter as Router,
+  // BrowserRouter as Router,
+  HashRouter,
   Routes,
   Route
 } from "react-router-dom";
@@ -20,7 +21,7 @@ function App() {
   return (
 
     <CartProvider>
-      <Router>
+      <HashRouter>
 
         <div>
           <Routes>
@@ -31,7 +32,7 @@ function App() {
           </Routes>
         </div>
 
-      </Router>
+      </HashRouter>
     </CartProvider>
   )
 }
