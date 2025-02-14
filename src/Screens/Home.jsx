@@ -19,11 +19,11 @@ export default function Home() {
       });
 
       if(Array.isArray(response.data) && response.data.length >= 2) {
-      setFoodItem(response.data[0]);
-      setFoodCat(response.data[1]);
+      setFoodItem(response.data.food_item);
+      setFoodCat(response.data.foodCategory);
 
-      console.log("Food Items:", response.data[0]);
-      console.log("Food Categories:", response.data[1]);
+      console.log("Food Items:", response.data.food_item);
+      console.log("Food Categories:", response.data.foodCategory);
       } else {
         console.error("Unepected API response format:", response.data);
       }
