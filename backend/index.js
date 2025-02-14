@@ -8,6 +8,8 @@ mongoDB();
 
 app.use(cors({
     origin: "https://gofood-frontendd.onrender.com",
+    methods: "GET, POST",
+    allowedHeaders: "Content-Type",
     credentials: true
 }));
 
