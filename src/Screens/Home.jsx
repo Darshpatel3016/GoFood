@@ -25,11 +25,6 @@ export default function Home() {
     } catch (error) {
       console.error("Error fetching food data:", error);
     }
-
-    setFoodItem(response[0]);
-    setFoodCat(response[1]);
-
-    // console.log(response[0], response[1]);
   };
 
   useEffect(() => {
