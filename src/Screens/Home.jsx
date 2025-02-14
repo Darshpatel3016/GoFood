@@ -18,10 +18,15 @@ export default function Home() {
         },
       });
 
+      if(Array.isArray(response.data) && response.data.length >= 2) {
       setFoodItem(response.data[0]);
       setFoodCat(response.data[1]);
 
-      console.log(response.data[0], response.data[1]);
+      console.log("Food Items:", response.data[0]);
+      console.log("Food Categories:", response.data[1]);
+      } else {
+        console.error("Unepected API response format:", response.data);
+      }
     } catch (error) {
       console.error("Error fetching food data:", error);
     }
@@ -117,7 +122,7 @@ export default function Home() {
       </div>
 
       <div className="container">
-        {foodCat && foodCat.length > 0 ? (
+        {foodCat.length > 0 ? (
           foodCat.map((data) => {
             return (
               <div className="row mb-3">
