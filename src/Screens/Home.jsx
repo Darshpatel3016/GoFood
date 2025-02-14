@@ -21,7 +21,7 @@ export default function Home() {
       setFoodItem(response.data[0]);
       setFoodCat(response.data[1]);
 
-      console.log(response.data[0], RemoveShoppingCartRounded.data[1]);
+      console.log(response.data[0], response.data[1]);
     } catch (error) {
       console.error("Error fetching food data:", error);
     }
@@ -117,44 +117,44 @@ export default function Home() {
       </div>
 
       <div className="container">
-        {foodCat != []
-          ? foodCat.map((data) => {
-              return (
-                <div className="row mb-3">
-                  <div key={data._id} className="fs-3 m-3">
-                    {data.CategoryName}
-                  </div>
-                  <hr />
-
-                  {foodItem != [] ? (
-                    foodItem
-                      .filter(
-                        (item) =>
-                          item.CategoryName === data.CategoryName &&
-                          item.name.toLowerCase().includes(search.toLowerCase())
-                      )
-                      .map((filterItems) => {
-                        return (
-                          <div
-                            key={filterItems._id}
-                            className="col-12 col-md-6 col-lg-3"
-                          >
-                            <Card
-                              foodItem={filterItems}
-                              options={filterItems.options[0]}
-                            >
-                              {" "}
-                            </Card>
-                          </div>
-                        );
-                      })
-                  ) : (
-                    <div> No Such Data Found</div>
-                  )}
+        {foodCat && foodCat.length > 0 ? (
+          foodCat.map((data) => {
+            return (
+              <div className="row mb-3">
+                <div key={data._id} className="fs-3 m-3">
+                  {data.CategoryName}
                 </div>
-              );
-            })
-          : ""}
+                <hr />
+
+                {Array.isArray(foodItem) && foodItem.length > 0 ? (
+                  foodItem
+                    .filter(
+                      (item) =>
+                        item.CategoryName === data.CategoryName &&
+                        item.name.toLowerCase().includes(search.toLowerCase())
+                    )
+                    .map((filterItems) => {
+                      return (
+                        <div
+                          key={filterItems._id}
+                          className="col-12 col-md-6 col-lg-3"
+                        >
+                          <Card
+                            foodItem={filterItems}
+                            options={filterItems.options[0]}
+                          />
+                        </div>
+                      );
+                    })
+                ) : (
+                  <div> No Such Data Found</div>
+                )}
+              </div>
+            );
+          })
+        ) : (
+          <p>Loading categories...</p>
+        )}
       </div>
 
       <div>
