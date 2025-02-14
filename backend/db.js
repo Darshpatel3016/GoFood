@@ -16,11 +16,17 @@ const mongoDB = async () => {
         console.log("Connected to MongoDB");
 
 
-        const fetched_data = await mongoose.connection.db.collection("food_item");       // fetch food item
-        let data = await fetched_data.find({}).toArray()
+        let data = await mongoose.connection.db.collection("food_item").find({}).toArray();
+        let catData = await mongoose.connection.db.collection("foodCategory").find({}).toArray();
 
-        const foodCategory = await mongoose.connection.db.collection("foodCategory");    // fetch food category
-        let catData = await foodCategory.find({}).toArray()
+        console.log("Fetched food items:", data.length);
+        console.log("Fetched food categories:", catData.length);
+
+        // const fetched_data = await mongoose.connection.db.collection("food_item");       // fetch food item
+        // let data = await fetched_data.find({}).toArray()
+
+        // const foodCategory = await mongoose.connection.db.collection("foodCategory");    // fetch food category
+        // let catData = await foodCategory.find({}).toArray()
 
 
         global.food_item = data;                              // store globally
