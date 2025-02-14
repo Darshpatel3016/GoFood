@@ -6,9 +6,12 @@ const cors = require("cors");
 
 mongoDB();
 
-app.use(cors());
+app.use(cors({
+    origin: "https://gofood-frontendd.onrender.com",
+    credentials: true
+}));
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
     res.header(
         "Access-Control-Allow-Headers",
