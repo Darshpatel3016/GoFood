@@ -22,7 +22,6 @@ const reducer = (state, action) => {
         };
         return updateState;
       } else {
-        // if it's a different size, add a
 
         return [
           ...state,

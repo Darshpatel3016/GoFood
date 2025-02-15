@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./Card.css";
 import { useDispatchCart, useCart } from "./ContexReducer";
+import { Toast, ToastContainer } from "react-bootstrap";
 
 export default function Card(props) {
   let dispatch = useDispatchCart();
@@ -12,13 +13,13 @@ export default function Card(props) {
 
   const [qty, setQty] = useState(1);
   const [size, setSize] = useState("");
+  const [showToast, setShowToast] = useState(false);
 
   const handleAddToCart = async () => {
     let food = [];
     for (const item of data) {
       if (item.id === props.foodItem._id) {
         food = item;
-
         break;
       }
     }
@@ -53,6 +54,11 @@ export default function Card(props) {
       qty: qty,
       size: size,
     });
+
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
   };
 
   let finalPrice = qty * parseInt(options[size]);
@@ -116,6 +122,35 @@ export default function Card(props) {
           </div>
         </div>
       </div>
+
+      <ToastContainer className="toast-container position-fixed bottom-0 end-0 p-3">
+        <Toast
+          show={showToast}
+          bg="success"
+          onClose={() => setShowToast(false)}
+          id="liveToast"
+          className="toast"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+        >
+          <Toast className="toast-header">
+            <Toast.Header>
+              <strong className="me-auto">GoFood Cart</strong>
+              <small>Just Now</small>
+            </Toast.Header>
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="toast"
+              aria-label="Close"
+            ></button>
+            <Toast.Body className="text-white">
+              {props.foodItem.name} Added to Cart{" "}
+            </Toast.Body>
+          </Toast>
+        </Toast>
+      </ToastContainer>
     </div>
   );
 }
