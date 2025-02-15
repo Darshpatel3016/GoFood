@@ -52,6 +52,13 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log("Credentials:", credentials);
+
+    if (!credentials.geolocation) {
+      alert("Location is missing..! Please enable locaion access");
+      return;
+    }
+
     try {
       const response = await axios.post(
         `${BASE_URL}/api/createuser`,
