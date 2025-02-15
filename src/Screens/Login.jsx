@@ -53,15 +53,17 @@ export default function Login() {
         height: "100vh",
       }}
     >
-      <div>
-        <Navbar />
-      </div>
-
-      <div className="container">
+      <div className="container d-flex align-items-center justify-content-center">
         <form
           className="w-50 m-auto mt-5 border bg-dark border-success rounded"
           onSubmit={handleSubmit}
         >
+          <div
+            className="row border border-bottom border-success my-2"
+            style={{ color: "white" }}
+          >
+            Hey, Foodiee Login Here..!
+          </div>
           <div className="m-3">
             <label
               htmlFor="Email"
@@ -78,13 +80,6 @@ export default function Login() {
               id="Email"
               onChange={onChange}
             />
-            <div
-              id="emailHelp"
-              className="form-text"
-              style={{ color: "white" }}
-            >
-              We'll never share your email with anyone else.
-            </div>
           </div>
 
           <div className="m-3">
@@ -105,11 +100,14 @@ export default function Login() {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="m-3 btn btn-primary">
             Submit
           </button>
-          <Link to="/createuser" className="m-3 btn btn-danger">
+          <Link to="/createuser" className="m-3 mx-1 btn btn-danger">
             I'm a New user
+          </Link>
+          <Link to="/" className="m-3 mx-1 btn btn-light">
+            Home
           </Link>
         </form>
       </div>

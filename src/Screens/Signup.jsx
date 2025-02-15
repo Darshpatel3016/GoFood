@@ -121,15 +121,17 @@ export default function Signup() {
         height: "100vh",
       }}
     >
-      <div>
-        <Navbar />
-      </div>
-
-      <div className="container">
+      <div className="container d-flex align-items-center justify-content-center">
         <form
           className="w-50 m-auto mt-5 border bg-dark border-success rounded"
           onSubmit={handleSubmit}
         >
+          <div
+            className="row border border-bottom border-success my-2"
+            style={{ color: "white" }}
+          >
+            Welcome to Our Food App..!
+          </div>
           <div className="m-3">
             <label
               placeholder="Please Enter Your Name"
@@ -194,7 +196,7 @@ export default function Signup() {
               type="button"
               onClick={handleClick}
               name="geolocation"
-              className=" btn btn-success"
+              className="btn btn-success"
             >
               Click for current Location{" "}
             </button>
@@ -221,6 +223,9 @@ export default function Signup() {
           </button>
           <Link to="/login" className="m-3 mx-1 btn btn-danger">
             Already a user
+          </Link>
+          <Link to="/" className="m-3 mx-1 btn btn-light">
+            Home
           </Link>
         </form>
       </div>
