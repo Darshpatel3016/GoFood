@@ -5,7 +5,6 @@ import axios from "axios";
 import { BASE_URL } from "../config";
 import Navbar from "../Components/Navbar";
 
-
 export default function Login() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
@@ -63,8 +62,12 @@ export default function Login() {
           className="w-50 m-auto mt-5 border bg-dark border-success rounded"
           onSubmit={handleSubmit}
         >
-          <div className="mb-3">
-            <label htmlFor="Email" className="form-label">
+          <div className="m-3">
+            <label
+              htmlFor="Email"
+              className="form-label"
+              style={{ color: "white" }}
+            >
               Email address
             </label>
             <input
@@ -75,13 +78,21 @@ export default function Login() {
               id="Email"
               onChange={onChange}
             />
-            <div id="emailHelp" className="form-text">
+            <div
+              id="emailHelp"
+              className="form-text"
+              style={{ color: "white" }}
+            >
               We'll never share your email with anyone else.
             </div>
           </div>
 
-          <div className="mb-3">
-            <label htmlFor="Password" className="form-label">
+          <div className="m-3">
+            <label
+              htmlFor="Password"
+              className="form-label"
+              style={{ color: "white" }}
+            >
               Password
             </label>
             <input

@@ -23,7 +23,7 @@ router.post(
       if (existingUser) {
         return res
           .status(400)
-          .json({ success: false, errors: "User already exists" });
+          .json({ success: false, alert: "User already exists" });
       }
 
       let salt = await bcrypt.genSalt(10);
