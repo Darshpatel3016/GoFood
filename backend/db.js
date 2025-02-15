@@ -3,10 +3,6 @@ require('dotenv').config();
 
 const mongoURI = process.env.ATLAS_URI;
 
-// console.log("mongodb uri:", process.env.ATLAS_URI);
-
-
-
 const mongoDB = async () => {
 
 
@@ -21,12 +17,6 @@ const mongoDB = async () => {
 
         console.log("Fetched food items:", data.length);
         console.log("Fetched food categories:", catData.length);
-
-        // const fetched_data = await mongoose.connection.db.collection("food_item");       // fetch food item
-        // let data = await fetched_data.find({}).toArray()
-
-        // const foodCategory = await mongoose.connection.db.collection("foodCategory");    // fetch food category
-        // let catData = await foodCategory.find({}).toArray()
 
 
         global.food_item = data;                              // store globally

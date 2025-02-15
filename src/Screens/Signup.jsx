@@ -72,34 +72,6 @@ export default function Signup() {
     });
   };
 
-  //   let latlong = await navLocation().then((res) => {
-  //     let latitude = res.coords.latitude;
-  //     let longitude = res.coords.longitude;
-  //     return [latitude, longitude];
-  //   });
-  //   // console.log(latlong)
-
-  //   let [lat, long] = latlong;
-  //   console.log(lat, long);
-  //   const response = await axios.post(
-  //     `${BASE_URL}/api/getlocation`,
-  //     {
-  //       latlong: { lat, long },
-  //     },
-  //     {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     }
-  //   );
-  //   const data = response.data;
-
-  //   const { location } = data;
-  //   console.log(location);
-  //   setAddress(location);
-  //   setCredentials({ ...credentials, [e.target.name]: location });
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -122,7 +94,6 @@ export default function Signup() {
       );
 
       console.log("Signup API responce:", response.data);
-      // const json = response.data;
 
       if (response.data.success) {
         //save the auth token to local storage and redirect
