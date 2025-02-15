@@ -127,7 +127,7 @@ export default function Signup() {
           onSubmit={handleSubmit}
         >
           <div
-            className="row-2 fs-4 border-bottom border-success border-3 my-2"
+            className="row-2 fs-3 d-flex justify-content-center border-bottom border-success border-3 m-2"
             style={{ color: "white" }}
           >
             Welcome to Our Food App..!
@@ -198,7 +198,7 @@ export default function Signup() {
               name="geolocation"
               className="btn btn-success"
             >
-              Click for current Location{" "}
+              Click for Current Location{" "}
             </button>
           </div>
           <div className="m-3">
@@ -221,10 +221,10 @@ export default function Signup() {
           <button type="submit" className="m-3 btn btn-success">
             Submit
           </button>
-          <Link to="/login" className="m-3 mx-1 btn btn-danger">
+          <Link to="/login" className="m-3 btn btn-danger">
             Already a user
           </Link>
-          <Link to="/" className="m-3 mx-1 btn btn-light">
+          <Link to="/" className="m-3 btn btn-light">
             Home
           </Link>
         </form>

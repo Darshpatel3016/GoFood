@@ -59,7 +59,7 @@ export default function Login() {
           onSubmit={handleSubmit}
         >
           <div
-            className="row-2 fs-4 border-bottom border-success border-3 my-2"
+            className="row-2 fs-3 d-flex justify-content-center border-bottom border-success border-3 m-2"
             style={{ color: "white" }}
           >
             Hey, Foodiee Login Here..!
