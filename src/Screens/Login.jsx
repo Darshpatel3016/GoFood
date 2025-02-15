@@ -59,7 +59,7 @@ export default function Login() {
           onSubmit={handleSubmit}
         >
           <div
-            className="row border border-bottom border-success my-2"
+            className="row-2 fs-4 border-bottom border-success border-3 my-2"
             style={{ color: "white" }}
           >
             Hey, Foodiee Login Here..!
@@ -103,10 +103,10 @@ export default function Login() {
           <button type="submit" className="m-3 btn btn-primary">
             Submit
           </button>
-          <Link to="/createuser" className="m-3 mx-1 btn btn-danger">
+          <Link to="/createuser" className="m-3 btn btn-danger">
             I'm a New user
           </Link>
-          <Link to="/" className="m-3 mx-1 btn btn-light">
+          <Link to="/" className="m-3 btn btn-light">
             Home
           </Link>
         </form>

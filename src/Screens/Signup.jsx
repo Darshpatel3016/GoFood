@@ -127,7 +127,7 @@ export default function Signup() {
           onSubmit={handleSubmit}
         >
           <div
-            className="row border border-bottom border-success my-2"
+            className="row-2 fs-4 border-bottom border-success border-3 my-2"
             style={{ color: "white" }}
           >
             Welcome to Our Food App..!
