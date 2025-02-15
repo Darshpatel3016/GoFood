@@ -20,8 +20,15 @@ export default function Signup() {
     try {
       let [lat, long] = await getUserlocation();
 
+      console.log("Latitude:", lat, "Longitude:", long);
+
       const response = await axios.post(`${BASE_URL}/api/getlocation`, {
-        latlong: `${lat}, ${long}`,
+        latitude: lat,
+        longitude: long,
+      }, {
+        headers: {
+          "Content-Type": "application/json",
+        }
       });
       console.log("Location API response:", response.data);
 
@@ -36,7 +43,7 @@ export default function Signup() {
         geolocation: response.data.location,
       }));
     } catch (error) {
-      console.error("Location API error:", error);
+      console.error("Error fetching Location:", error.response?.data || error.message);
       alert("Failed to fetch Location...!");
     }
   };
