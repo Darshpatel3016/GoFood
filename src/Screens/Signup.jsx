@@ -16,48 +16,80 @@ export default function Signup() {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    let navLocation = () => {
-      return new Promise((res, rej) => {
-        navigator.geolocation.getCurrentPosition(res, rej);
+
+    try {
+      let [lat, long] = await getUserlocation();
+
+      const response = await axios.post(`${BASE_URL}/api/getlocation`, {
+        latlong: `${lat}, ${long}`,
       });
-    };
-    let latlong = await navLocation().then((res) => {
-      let latitude = res.coords.latitude;
-      let longitude = res.coords.longitude;
-      return [latitude, longitude];
-    });
-    // console.log(latlong)
+      console.log("Location API response:", response.data);
 
-    let [lat, long] = latlong;
-    console.log(lat, long);
-    const response = await axios.post(
-      `${BASE_URL}/api/getlocation`,
-      {
-        latlong: { lat, long },
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
+      if (!response.data.location) {
+        alert("Location API did not return data...!");
+        return;
       }
-    );
-    const data = response.data;
 
-    const { location } = data;
-    console.log(location);
-    setAddress(location);
-    setCredentials({ ...credentials, [e.target.name]: location });
+      setAddress(response.data.location);
+      setCredentials((prev) => ({
+        ...prev,
+        geolocation: response.data.location,
+      }));
+    } catch (error) {
+      console.error("Location API error:", error);
+      alert("Failed to fetch Location...!");
+    }
   };
+
+  const getUserlocation = () => {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          let latitude = position.coords.latitude;
+          let longitude = position.coords.longitude;
+          resolve([latitude, longitude]);
+        },
+        (error) => {
+          console.error("Geolocation Error:", error);
+          alert("Please allow location access...!");
+          reject(error);
+        }
+      );
+    });
+  };
+
+  //   let latlong = await navLocation().then((res) => {
+  //     let latitude = res.coords.latitude;
+  //     let longitude = res.coords.longitude;
+  //     return [latitude, longitude];
+  //   });
+  //   // console.log(latlong)
+
+  //   let [lat, long] = latlong;
+  //   console.log(lat, long);
+  //   const response = await axios.post(
+  //     `${BASE_URL}/api/getlocation`,
+  //     {
+  //       latlong: { lat, long },
+  //     },
+  //     {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     }
+  //   );
+  //   const data = response.data;
+
+  //   const { location } = data;
+  //   console.log(location);
+  //   setAddress(location);
+  //   setCredentials({ ...credentials, [e.target.name]: location });
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     console.log("Credentials:", credentials);
-
-    if (!credentials.geolocation) {
-      alert("Location is missing..! Please enable locaion access");
-      return;
-    }
 
     try {
       const response = await axios.post(
@@ -75,25 +107,25 @@ export default function Signup() {
         }
       );
 
-      const json = response.data;
-      console.log("API responce:", response.data);
+      console.log("Signup API responce:", response.data);
+      // const json = response.data;
 
-      if (json.success) {
+      if (response.data.success) {
         //save the auth token to local storage and redirect
-        localStorage.setItem("token", json.authToken);
+        localStorage.setItem("token", response.data.authToken);
         navigate("/login");
       } else {
         alert("Enter Valid Credentials");
       }
     } catch (error) {
-      console.error("Error during API request:", error);
-      alert("Something went wrong");
+      console.error("Signup Error:", error);
+      alert("Signup failed... please try again");
     }
   };
 
-  const onChange = (e) => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
-  };
+  // const onChange = (e) => {
+  //   setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  // };
 
   return (
     <div
