@@ -45,7 +45,7 @@ router.post(
       res.json({ success: true, authToken: authToken });
 
     } catch (error) {
-      console.log("Error saving user:", error);
+      console.log("Error saving user:", error.message);
       res.status(500).json({ success: false, error: error.message });
     }
   }
