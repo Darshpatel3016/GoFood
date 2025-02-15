@@ -33,7 +33,7 @@ export default function Signup() {
       console.log("Location API response:", response.data);
 
       if (!response.data.location) {
-        alert("Location API did not return data...!");
+        alert("Failed to fetch location...!");
         return;
       }
 

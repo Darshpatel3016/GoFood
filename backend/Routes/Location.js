@@ -2,23 +2,25 @@ const express = require("express");
 const router = express.Router();
 
 const getLocationFromCoors = async (lat, long) => {
-    return 'Lat: ${lat}, Long: ${long}';
+  return "Lat: ${lat}, Long: ${long}";
 };
 
 router.post("/getlocation", async (req, res) => {
-    try {
-        const{latlong} = req.body;
+  const { latitude, longitude } = req.body;
 
-        if(!latlong || !latlong.lat || !latlong.long) {
-            return res.status(400).json({error: "Latitude and Longitude are required"});
-        }
+  if (!latitude || !longitude) {
+    return res
+      .status(400)
+      .json({ error: "Latitude and Longitude are required" });
+  }
 
-        const location = await getLocationFromCoors(latlong.lat, latlong.long);
-        return res.json({location});
-    } catch (error) {
-        console.log("Error fetching location:", error.message);
-        return res.status(500).json({error: "Server error"});
-    }
+  try {
+    const location = await getLocationFromCoors(latitude, longitude);
+    res.json({ location });
+  } catch (error) {
+    console.log("Error fetching location:", error.message);
+    return res.status(500).json({ error: "Failed to fetch location" });
+  }
 });
 
 module.exports = router;
