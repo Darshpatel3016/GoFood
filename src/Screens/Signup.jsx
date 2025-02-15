@@ -22,14 +22,18 @@ export default function Signup() {
 
       console.log("Latitude:", lat, "Longitude:", long);
 
-      const response = await axios.post(`${BASE_URL}/api/getlocation`, {
-        latitude: lat,
-        longitude: long,
-      }, {
-        headers: {
-          "Content-Type": "application/json",
+      const response = await axios.post(
+        `${BASE_URL}/api/getlocation`,
+        {
+          latitude: lat,
+          longitude: long,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      });
+      );
       console.log("Location API response:", response.data);
 
       if (!response.data.location) {
@@ -43,7 +47,10 @@ export default function Signup() {
         geolocation: response.data.location,
       }));
     } catch (error) {
-      console.error("Error fetching Location:", error.response?.data || error.message);
+      console.error(
+        "Error fetching Location:",
+        error.response?.data || error.message
+      );
       alert("Failed to fetch Location...!");
     }
   };
@@ -154,6 +161,7 @@ export default function Signup() {
         >
           <div className="m-3">
             <label
+              placeholder="Please Enter Your Name"
               htmlFor="name"
               className="form-label"
               style={{ color: "white" }}
@@ -164,6 +172,7 @@ export default function Signup() {
               type="text"
               className="form-control"
               name="name"
+              id="name"
               value={credentials.name}
               onChange={onChange}
               aria-describedby="emailHelp"
@@ -171,6 +180,7 @@ export default function Signup() {
           </div>
           <div className="m-3">
             <label
+              placeholder="Please Enter Your Email"
               htmlFor="email"
               className="form-label"
               style={{ color: "white" }}
@@ -181,6 +191,7 @@ export default function Signup() {
               type="email"
               className="form-control"
               name="email"
+              id="email"
               value={credentials.email}
               onChange={onChange}
               aria-describedby="emailHelp"
@@ -199,7 +210,8 @@ export default function Signup() {
                 type="text"
                 className="form-control"
                 name="address"
-                placeholder='"Click below for fetching address"'
+                id="address"
+                placeholder="Click below for fetching address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 aria-describedby="emailHelp"
@@ -218,7 +230,7 @@ export default function Signup() {
           </div>
           <div className="m-3">
             <label
-              htmlFor="exampleInputPassword1"
+              htmlFor="password"
               className="form-label"
               style={{ color: "white" }}
             >
@@ -230,6 +242,7 @@ export default function Signup() {
               value={credentials.password}
               onChange={onChange}
               name="password"
+              id="password"
             />
           </div>
           <button type="submit" className="m-3 btn btn-success">

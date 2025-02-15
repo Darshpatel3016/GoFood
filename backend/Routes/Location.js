@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const getLocationFromCoors = async (lat, long) => {
-  return "Lat: ${lat}, Long: ${long}";
+  return `Lat: ${lat}, Long: ${long}`;
 };
 
 router.post("/getlocation", async (req, res) => {
