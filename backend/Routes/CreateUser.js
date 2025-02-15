@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router()
-const User = require("../models/User");
 const { body, validationResult } = require('express-validator');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const User = require("../models/User");
 const jwtSecret = process.env.JWT_SECRET;
 
 
@@ -12,8 +12,8 @@ router.post("/createuser",
     body('email').isEmail(),
     body('name').isLength({ min: 5 }),
     body('password').isLength({ min: 5 }),
+    
     async (req, res) => {
-
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
@@ -29,8 +29,16 @@ router.post("/createuser",
                 password: secPassword,
                 email: req.body.email,
                 location: req.body.location
-            })
-            res.json({ success: true, user: newUser });
+            });
+
+            const data = {
+                user: {
+                    id: newUser.id
+                }
+            }
+            const authToken = jwt.sign(data, jwtSecret)
+
+            res.json({ success: true, authToken: authToken });
 
         } catch (error) {
             console.log("Error saving user:", error);

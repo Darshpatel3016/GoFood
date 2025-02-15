@@ -58,12 +58,12 @@ export default function Signup() {
 
         const json = response.data
 
-        console.log(json);
+        console.log("API responce:", json);
+        
         if (json.success) {
-            //save the auth toke to local storage and redirect
+            //save the auth token to local storage and redirect
             localStorage.setItem('token', json.authToken)
             navigate("/login")
-
         }
         else {
             alert("Enter Valid Credentials")
