@@ -18,15 +18,17 @@ export default function Home() {
         },
       });
 
-      if(Array.isArray(response.data) && response.data.length >= 2) {
+      // if(Array.isArray(response.data) && response.data.length >= 2) {
       setFoodItem(response.data.food_item);
       setFoodCat(response.data.foodCategory);
 
-      console.log("Food Items:", response.data.food_item);
-      console.log("Food Categories:", response.data.foodCategory);
-      } else {
-        console.error("Unepected API response format:", response.data);
-      }
+      console.log(response.data.food_item, response.data.foodCategory);
+
+      // console.log("Food Items:", response.data.food_item);
+      // console.log("Food Categories:", response.data.foodCategory);
+      // } else {
+        // console.error("Unexpected API response format:", response.data);
+      // }
     } catch (error) {
       console.error("Error fetching food data:", error);
     }
