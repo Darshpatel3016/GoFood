@@ -58,7 +58,7 @@ export default function Signup() {
 
         const json = response.data
 
-        console.log("API responce:", json);
+        console.log("API responce:", response.data);
         
         if (json.success) {
             //save the auth token to local storage and redirect
