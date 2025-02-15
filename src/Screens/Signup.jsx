@@ -27,7 +27,7 @@ export default function Signup() {
 
         let [lat, long] = latlong
         console.log(lat, long)
-        const response = await axios.post(`${BASE_URL}/api/auth/getlocation`, {
+        const response = await axios.post(`${BASE_URL}/api/getlocation`, {
             latlong: { lat, long }
         }, {
             headers: {
@@ -44,7 +44,7 @@ export default function Signup() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await axios.post(`${BASE_URL}/api/auth/createuser`, {
+        const response = await axios.post(`${BASE_URL}/api/createuser`, {
 
             name: credentials.name,
             email: credentials.email,
