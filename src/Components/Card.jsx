@@ -3,7 +3,6 @@ import "./Card.css";
 import { useDispatchCart, useCart } from "./ContexReducer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import { set } from "mongoose";
 
 export default function Card(props) {
   let dispatch = useDispatchCart();
@@ -73,15 +72,17 @@ export default function Card(props) {
   return (
     <div>
       <div>
-        <div
-          class="alert alert-success alert-dismissible fade show"
-          role="alert"
-        >
-          <strong>
-            {props.foodItem.name} (${size})
-          </strong>{" "}
-          Added to cart..!
-        </div>
+        {showAlert && (
+          <div
+            className="alert alert-success alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>
+              {props.foodItem.name} (${size})
+            </strong>{" "}
+            Added to cart..!
+          </div>
+        )}
         <div className="card mt-5">
           <img src={props.foodItem.img} className="card-img-top" alt="..." />
           <div className="card-body">
