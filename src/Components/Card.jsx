@@ -3,6 +3,7 @@ import "./Card.css";
 import { useDispatchCart, useCart } from "./ContexReducer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { set } from "mongoose";
 
 export default function Card(props) {
   let dispatch = useDispatchCart();
@@ -14,6 +15,7 @@ export default function Card(props) {
 
   const [qty, setQty] = useState(1);
   const [size, setSize] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleAddToCart = async () => {
     let food = [];
@@ -54,7 +56,12 @@ export default function Card(props) {
       qty: qty,
       size: size,
     });
-    alert(`${props.foodItem.name} (${size}) Added to cart..!`);
+
+    setShowAlert(true);
+
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 2000);
   };
 
   let finalPrice = qty * parseInt(options[size]);
@@ -66,6 +73,15 @@ export default function Card(props) {
   return (
     <div>
       <div>
+        <div
+          class="alert alert-success alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>
+            {props.foodItem.name} (${size})
+          </strong>{" "}
+          Added to cart..!
+        </div>
         <div className="card mt-5">
           <img src={props.foodItem.img} className="card-img-top" alt="..." />
           <div className="card-body">
