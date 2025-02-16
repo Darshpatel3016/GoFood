@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./Card.css";
 import { useDispatchCart, useCart } from "./ContexReducer";
-// import { Toast, ToastContainer } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-
 
 export default function Card(props) {
   let dispatch = useDispatchCart();
@@ -16,8 +14,6 @@ export default function Card(props) {
 
   const [qty, setQty] = useState(1);
   const [size, setSize] = useState("");
-  const [showToast, setShowToast] = useState(false);
-  // const [toastMessage, setToastMessage] = useState("");
 
   const handleAddToCart = async () => {
     let food = [];
@@ -58,13 +54,7 @@ export default function Card(props) {
       qty: qty,
       size: size,
     });
-
-    // setToastMessage(`${props.foodItem.name} (${size}) Added to Cart..!!`);
-
-    setShowToast(true);
-    setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
+    alert(`${props.foodItem.name} (${size}) Added to cart..!`);
   };
 
   let finalPrice = qty * parseInt(options[size]);
@@ -128,64 +118,6 @@ export default function Card(props) {
           </div>
         </div>
       </div>
-
-      <div
-        className="toast-container position-fixed bottom-0 end-0 p-3"
-        style={{zIndex: 11}}
-      >
-        <div
-          id="liveToast"
-          className={`toast ${showToast ? "show" : "hide"}`}
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
-        >
-          <div className="toast-header">
-            <strong className="me-auto">GoFood Cart</strong>
-            <small>Just Now</small>
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="toast"
-              aria-label="Close"
-              onClick={() => setShowToast(false)}
-            ></button>
-          </div>
-          <div className="toast-body">
-            {/* {toastMessage} */}
-            `${props.foodItem.name} (${size}) Added to Cart..!!`
-          </div>
-        </div>
-      </div>
-
-      {/* <ToastContainer className="toast-container position-fixed bottom-0 end-0 p-3">
-        <Toast
-          show={showToast}
-          bg="success"
-          onClose={() => setShowToast(false)}
-          id="liveToast"
-          className="toast"
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
-        >
-          <Toast className="toast-header">
-            <Toast.Header>
-              <strong className="me-auto">GoFood Cart</strong>
-              <small>Just Now</small>
-            </Toast.Header>
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="toast"
-              aria-label="Close"
-            ></button>
-            <Toast.Body className="text-white">
-              {props.foodItem.name} Added to Cart{" "}
-            </Toast.Body>
-          </Toast>
-        </Toast>
-      </ToastContainer> */}
     </div>
   );
 }
