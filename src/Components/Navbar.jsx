@@ -5,6 +5,7 @@ import Model from "../Model";
 import Cart from "../Screens/Cart";
 import { useCart } from "./ContexReducer";
 
+
 export default function Navbar() {
 
   const [cartView, setCartView] = useState(false);
