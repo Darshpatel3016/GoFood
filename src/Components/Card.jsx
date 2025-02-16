@@ -56,10 +56,16 @@ export default function Card(props) {
     });
   };
 
+  if (!size || !options[size]) {
+    console.warn("Invalid size:", size, "Available options:", options);
+  }
   let finalPrice = qty * (options[size] ? parseInt(options[size]) : 0);
 
   useEffect(() => {
-    setSize(priceRef.current?.value || Object.keys(options)[0]);
+    if (priceRef.current) {
+      console.log("Intial size set to:", priceRef.current.value);
+      setSize(priceRef.current?.value || Object.keys(options)[0]);
+    }
   }, [options]);
 
   return (
