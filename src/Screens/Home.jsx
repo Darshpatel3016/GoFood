@@ -18,11 +18,20 @@ export default function Home() {
         },
       });
 
-      setFoodItem(response.data.food_item);
-      setFoodCat(response.data.foodCategory);
+      console.log("API Response:", response.data);
+
+      if (
+        response.data &&
+        response.data.food_item &&
+        response.data.foodCategory
+      ) {
+        setFoodItem(response.data.food_item);
+        setFoodCat(response.data.foodCategory);
+      } else {
+        console.error("Unexpected response structure:", response.data);
+      }
 
       console.log(response.data.food_item, response.data.foodCategory);
-
     } catch (error) {
       console.error("Error fetching food data:", error);
     }
@@ -131,8 +140,8 @@ export default function Home() {
                   foodItem
                     .filter(
                       (item) =>
-                        item.CategoryName === data.CategoryName &&
-                        item.name.toLowerCase().includes(search.toLowerCase())
+                        item?.CategoryName === data?.CategoryName &&
+                        item?.name?.toLowerCase().includes(search.toLowerCase())
                     )
                     .map((filterItems) => {
                       return (
@@ -142,7 +151,7 @@ export default function Home() {
                         >
                           <Card
                             foodItem={filterItems}
-                            options={filterItems.options[0]}
+                            options={filterItems.options?.[0]}
                           />
                         </div>
                       );
