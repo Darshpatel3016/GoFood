@@ -5,6 +5,7 @@ import { useDispatchCart, useCart } from "./ContexReducer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
+
 export default function Card(props) {
   let dispatch = useDispatchCart();
   let data = useCart();
@@ -16,6 +17,7 @@ export default function Card(props) {
   const [qty, setQty] = useState(1);
   const [size, setSize] = useState("");
   const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
 
   const handleAddToCart = async () => {
     let food = [];
@@ -56,6 +58,8 @@ export default function Card(props) {
       qty: qty,
       size: size,
     });
+
+    setToastMessage(`${props.foodItem.name} (${size}) Added to Cart..!!`);
 
     setShowToast(true);
     setTimeout(() => {
@@ -148,7 +152,7 @@ export default function Card(props) {
             ></button>
           </div>
           <div className="toast-body">
-            {props.foodItem.name} ({size}) Added to Cart..!!
+            {toastMessage}
           </div>
         </div>
       </div>
