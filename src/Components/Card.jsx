@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./Card.css";
 import { useDispatchCart, useCart } from "./ContexReducer";
-import { Toast, ToastContainer } from "react-bootstrap";
+// import { Toast, ToastContainer } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 export default function Card(props) {
   let dispatch = useDispatchCart();
@@ -123,7 +125,35 @@ export default function Card(props) {
         </div>
       </div>
 
-      <ToastContainer className="toast-container position-fixed bottom-0 end-0 p-3">
+      <div
+        className="toast-container position-fixed bottom-0 end-0 p-3"
+        style="z-index: 11"
+      >
+        <div
+          id="liveToast"
+          className={`toast ${showToast ? "show" : "hide"}`}
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+        >
+          <div className="toast-header">
+            <strong className="me-auto">GoFood Cart</strong>
+            <small>Just Now</small>
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="toast"
+              aria-label="Close"
+              onClick={() => setShowToast(false)}
+            ></button>
+          </div>
+          <div className="toast-body">
+            {props.foodItem.size} size {props.foodItem.name} Added to Cart..!!
+          </div>
+        </div>
+      </div>
+
+      {/* <ToastContainer className="toast-container position-fixed bottom-0 end-0 p-3">
         <Toast
           show={showToast}
           bg="success"
@@ -150,7 +180,7 @@ export default function Card(props) {
             </Toast.Body>
           </Toast>
         </Toast>
-      </ToastContainer>
+      </ToastContainer> */}
     </div>
   );
 }
