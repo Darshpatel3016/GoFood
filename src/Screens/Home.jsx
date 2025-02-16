@@ -22,8 +22,8 @@ export default function Home() {
 
       if (
         response.data &&
-        response.data.food_item &&
-        response.data.foodCategory
+        response.data?.food_item &&
+        response.data?.foodCategory
       ) {
         setFoodItem(response.data.food_item);
         setFoodCat(response.data.foodCategory);
@@ -141,17 +141,17 @@ export default function Home() {
                     .filter(
                       (item) =>
                         item?.CategoryName === data?.CategoryName &&
-                        item?.name?.toLowerCase().includes(search.toLowerCase())
+                        item?.name?.toLowerCase()?.includes(search?.toLowerCase())
                     )
-                    .map((filterItems) => {
+                    ?.map((filterItems) => {
                       return (
                         <div
-                          key={filterItems._id}
+                          key={filterItems?._id}
                           className="col-12 col-md-6 col-lg-3"
                         >
                           <Card
                             foodItem={filterItems}
-                            options={filterItems.options?.[0]}
+                            options={filterItems?.options?.[0] || {}}
                           />
                         </div>
                       );
