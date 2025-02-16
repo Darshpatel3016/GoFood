@@ -148,7 +148,7 @@ export default function Card(props) {
             ></button>
           </div>
           <div className="toast-body">
-            {food.size} size {props.foodItem.name} Added to Cart..!!
+            {props.foodItem.name} ({size}) Added to Cart..!!
           </div>
         </div>
       </div>
