@@ -13,7 +13,7 @@ export default function Card(props) {
   let priceOptions = Object.keys(options);
 
   const [qty, setQty] = useState(1);
-  const [size, setSize] = useState("");
+  const [size, setSize] = useState(Object.keys(options)[0] || "");
 
   const handleAddToCart = async () => {
     let food = [];
@@ -56,11 +56,11 @@ export default function Card(props) {
     });
   };
 
-  let finalPrice = qty * parseInt(options[size]);
+  let finalPrice = qty * (options[size] ? parseInt(options[size]) : 0);
 
   useEffect(() => {
-    setSize(priceRef.current.value);
-  }, []);
+    setSize(priceRef.current?.value || Object.keys(options)[0]);
+  }, [options]);
 
   return (
     <div>
