@@ -28,9 +28,9 @@ const reducer = (state, action) => {
           {
             id: action.id,
             name: action.name,
-            qty: parseInt(action.qty), // ensure quantity is stored as a number
+            qty: parseInt(action.qty), 
             size: action.size,
-            price: parseFloat(action.price), // ensure price is stored as number
+            price: parseFloat(action.price),
             img: action.img,
           },
         ];

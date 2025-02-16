@@ -1,7 +1,7 @@
 import Home from './Screens/Home'
 import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap/dist/js/bootstrap.bundle"
-import "bootsrap/dist/css/bootstrap.min.css"
+
 import {
   HashRouter,
   Routes,

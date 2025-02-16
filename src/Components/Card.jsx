@@ -14,7 +14,6 @@ export default function Card(props) {
 
   const [qty, setQty] = useState(1);
   const [size, setSize] = useState("");
-  const [showAlert, setShowAlert] = useState(false);
 
   const handleAddToCart = async () => {
     let food = [];
@@ -55,12 +54,6 @@ export default function Card(props) {
       qty: qty,
       size: size,
     });
-
-    setShowAlert(true);
-
-    setTimeout(() => {
-      setShowAlert(false);
-    }, 2000);
   };
 
   let finalPrice = qty * parseInt(options[size]);
@@ -72,17 +65,6 @@ export default function Card(props) {
   return (
     <div>
       <div>
-        {showAlert && (
-          <div
-            className="alert alert-success alert-dismissible fade show"
-            role="alert"
-          >
-            <strong>
-              {props.foodItem.name} (${size})
-            </strong>{" "}
-            Added to cart..!
-          </div>
-        )}
         <div className="card mt-5">
           <img src={props.foodItem.img} className="card-img-top" alt="..." />
           <div className="card-body">
