@@ -10,6 +10,7 @@ export default function Card(props) {
   const priceRef = useRef();
 
   let options = props.options;
+  console.log("options received in card", props.options)
   let priceOptions = Object.keys(options);
 
   const [qty, setQty] = useState(1);
