@@ -131,7 +131,7 @@ export default function Card(props) {
 
       <div
         className="toast-container position-fixed bottom-0 end-0 p-3"
-        style="z-index: 11"
+        style={{zIndex: 11}}
       >
         <div
           id="liveToast"
